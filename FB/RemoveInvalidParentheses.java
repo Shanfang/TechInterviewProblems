@@ -1,3 +1,4 @@
+// bfs approachs
 class Solution {
     public List<String> removeInvalidParentheses(String s) {
         List<String> result = new ArrayList<>();
@@ -50,5 +51,13 @@ class Solution {
             }
         }
         return leftCount == 0;
+    }
+}
+
+
+// dfs approach
+class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+
     }
 }
