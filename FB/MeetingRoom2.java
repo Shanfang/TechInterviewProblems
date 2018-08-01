@@ -28,3 +28,33 @@ class Solution {
         return minHeap.size();
     }
 }
+
+// sweep line
+class Solution {
+    public int minMeetingRooms(Interval[] intervals) {
+        if (intervals == null || intervals.length == 0) {
+            return 0;
+        }
+
+        int[] starts = new int[intervals.length];
+        int[] ends = new int[intervals.length];
+        for (int i = 0; i < intervals.length; i++) {
+            starts[i] = intervals[i].start;
+            ends[i] = intervals[i].end;
+        }
+
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+
+        int count = 1;
+        int endIdx = 0;
+        for (int i = 1; i < starts.length; i++) {
+            if (starts[i] >= ends[endIdx]) {
+                endIdx++;
+            } else {
+                count++;
+            }
+        }
+        return count;
+    }
+}
