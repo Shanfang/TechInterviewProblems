@@ -57,7 +57,7 @@ class Solution {
         int num = 0;
         int endIndex = 0;
         for (int i = 0; i < starts.length; i++) {
-            if (start[i] < ends[endIndex]) {
+            if (starts[i] < ends[endIndex]) {
                 num++;
             } else {
                 endIndex++;
