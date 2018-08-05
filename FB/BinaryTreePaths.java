@@ -30,3 +30,30 @@ class Solution {
         }
     }
 }
+
+// divide and conquer
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> paths = new ArrayList<String>();
+        if (root == null) {
+            return paths;
+        }
+
+        List<String> leftPaths = binaryTreePaths(root.left);
+        List<String> rightPaths = binaryTreePaths(root.right);
+        for (String path : leftPaths) {
+            path = root.val + "->" + path;
+            paths.add(path);
+        }
+
+        for (String path : rightPaths) {
+            path = root.val + "->" + path;
+            paths.add(path);
+        }
+
+        if (paths.size() == 0) {
+            paths.add(String.valueOf(root.val));
+        }
+        return paths;
+    }
+}
