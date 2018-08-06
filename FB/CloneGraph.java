@@ -51,3 +51,33 @@ public class Solution {
         return new ArrayList<UndirectedGraphNode> (nodes);
     }
 }
+
+// use DFS
+public class Solution {
+   public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+       return clone(node, new HashMap<>());
+   }
+
+   private UndirectedGraphNode clone(UndirectedGraphNode source, Map<UndirectedGraphNode, UndirectedGraphNode> map) {
+       if (source == null) {
+           return null;
+       }
+
+       if (map.containsKey(source)) {
+           return map.get(source);
+       }
+
+       UndirectedGraphNode copy = new UndirectedGraphNode(source.label);
+       map.put(source, copy);
+
+       for (UndirectedGraphNode neighbor : source.neighbors) {
+           if (map.containsKey(neighbor)) {
+               copy.neighbors.add(map.get(neighbor));
+           } else {
+               UndirectedGraphNode copyNeighbor = clone(neighbor, map);
+               copy.neighbors.add(copyNeighbor);
+           }
+       }
+       return copy;
+   }
+}
