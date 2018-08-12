@@ -19,7 +19,7 @@ class Solution {
 
         while (!queue.isEmpty()) {
             int count = queue.size();
-            int sum = 0;
+            long sum = 0;
             for (int i = 0; i < count; i++) {
                 TreeNode node = queue.poll();
                 sum += node.val;
@@ -30,7 +30,7 @@ class Solution {
                     queue.offer(node.right);
                 }
             }
-            result.add(1. 0 * sum / count);
+            result.add(1.0 * sum / count);
         }
         return result;
     }
