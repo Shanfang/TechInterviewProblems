@@ -30,3 +30,26 @@ class Solution {
         return (s.val == t.val && sameTree(s.left, t.left) && sameTree(s.right, t.right));
     }
 }
+
+// use preorder traversal
+class Solution {
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if (s == null) {
+            return t == null;
+        }
+        String orderS = preorder(s, true);
+        String orderT = preorder(t, true);
+        return orderS.indexOf(orderT) >= 0;
+    }
+
+    private String preorder(TreeNode root, boolean isLeft) {
+        if (root == null) {
+            if (isLeft) {
+                return "L";
+            } else {
+                return "R";
+            }
+        }
+        return "T" + root.val + preorder(root.left, true) + preorder(root.right, false);
+    }
+}
