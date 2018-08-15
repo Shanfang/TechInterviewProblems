@@ -16,7 +16,7 @@ class Solution {
         }
         // square the cost to take care of evenly distribution spaces
         for (int i = 0; i < len; i++) {
-            for (int j = i + 1; j < len; j++) {
+            for (int j = i; j < len; j++) {
                 if (dp[i][j] < 0) {
                     dp[i][j] = Integer.MAX_VALUE;
                 } else {
