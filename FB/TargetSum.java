@@ -58,3 +58,37 @@ class Solution {
         return memo[index][curSum + 1000];
     }
 }
+
+// DP
+class Solution {
+    public int findTargetSumWays(int[] nums, int S) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        if (sum < S || -sum > S) {
+            return 0;
+        }
+
+        int[][] dp = new int[nums.length][sum * 2 + 1];
+        if (nums[0] == 0) {
+            dp[0][sum] = 2;
+        } else {
+            dp[0][sum - nums[0]] = 1;
+            dp[0][sum + nums[0]] = 1;
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < 2 * sum + 1; j++) {
+                if (j - nums[i]>= 0) {
+                    dp[i][j] += dp[i - 1][j - nums[i]];
+                }
+                if (j + nums[i] < 2 * sum + 1) {
+                    dp[i][j] += dp[i - 1][j + nums[i]];
+                }
+            }
+        }
+
+        return dp[nums.length - 1][S + sum];
+    }
+}
