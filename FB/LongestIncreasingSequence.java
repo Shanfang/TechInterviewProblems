@@ -1,3 +1,4 @@
+// O(N^2) time complexity
 class Solution {
     public int lengthOfLIS(int[] nums) {
         if (nums == null || nums.length == 0) {
