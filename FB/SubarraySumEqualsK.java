@@ -1,3 +1,12 @@
+/*
+The brute force approach is to try different pairs of (start, end) index.
+
+To make it more efficient, we try different end index, while only try those potential start index.
+Actually, we are not trying to see it each start index works or not. Using a hashmap, we can get the
+number of different start indexes with prefix sum equals prefix[endIdx] - k.
+
+This is kinda of memorization in DP.
+*/
 class Solution {
     public int subarraySum(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
