@@ -52,3 +52,39 @@ class Solution {
         return node1;
     }
 }
+
+// iterative approach
+class Solution {
+    public Node treeToDoublyList(Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        // find the smallest node in the tree
+        Node head = root;
+        while (head.left != null) {
+            head = head.left;
+        }
+
+        Stack<Node> stack = new Stack<>();
+        Node cur = root;
+        Node pre = null;
+        while (!stack.isEmpty() || cur != null) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+
+            cur = stack.pop();
+            if (pre != null) {
+                pre.right = cur;
+                cur.left = pre;
+            }
+            pre = cur;
+            cur = cur.right;
+        }
+        head.left = pre;
+        pre.right = head;
+        return head;
+    }
+}
