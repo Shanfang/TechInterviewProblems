@@ -1,10 +1,19 @@
- class Solution {
+class Solution {
     public int findLengthOfLCIS(int[] nums) {
-        int ans = 0, anchor = 0;
-        for (int i = 0; i < nums.length; ++i) {
-            if (i > 0 && nums[i-1] >= nums[i]) anchor = i;
-            ans = Math.max(ans, i - anchor + 1);
+        if (nums == null || nums.length == 0) {
+            return 0;
         }
-        return ans;
+
+        int maxLen = 1;
+        int preLen = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1]) {
+                preLen++;
+            } else {
+                preLen = 1;
+            }
+            maxLen = Math.max(preLen, maxLen);
+        }
+        return maxLen;
     }
 }
