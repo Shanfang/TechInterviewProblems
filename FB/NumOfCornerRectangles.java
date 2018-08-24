@@ -19,6 +19,7 @@ class Solution {
     }
 }
 
+// NOTE!!!: the following solution does not give correct answer sometimes, to be fixed!
 // sparse dense rows
 class Solution {
     public int countCornerRectangles(int[][] grid) {
