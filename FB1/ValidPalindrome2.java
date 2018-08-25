@@ -4,7 +4,7 @@ class Solution {
             return true;
         }
 
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length() / 2; i++) { // avoid duplicate check
             int j = s.length() - 1 - i;
             if (s.charAt(i) != s.charAt(j)) {
                 return checkSubstring(s, i + 1, j) || checkSubstring(s, i, j - 1);
