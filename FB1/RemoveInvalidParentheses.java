@@ -42,10 +42,15 @@ class Solution {
                 continue;
             }
             String newStr = str.substring(0, i) + str.substring(i + 1);
-            if (str.charAt(i) == '(') {
-                helper(newStr, i, leftP - 1, rightP, result);
-            } else {
-              helper(newStr, i, leftP, rightP - 1, result);
+            // if (str.charAt(i) == '(') {
+            //     helper(newStr, i, leftP - 1, rightP, result);
+            // } else {
+            //   helper(newStr, i, leftP, rightP - 1, result);
+            // }
+            if (rightP > 0) {
+                helper(newStr, i, leftP, rightP - 1, result);
+            } else if (leftP > 0) {
+              helper(newStr, i, leftP - 1, rightP, result);
             }
         }
     }
