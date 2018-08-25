@@ -33,3 +33,34 @@ class Solution {
         return result;
     }
 }
+
+// two pointers
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        if (nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0) {
+            return new int[]{};
+        }
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int i = 0, j = 0;
+        Set<Integer> set = new HashSet<>();
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] == nums2[j]) {
+                set.add(nums1[i]);
+                i++;
+                j++;
+            } else if (nums1[i] < nums2[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        int[] result = new int[set.size()];
+        int index = 0;
+        for (int num : set) {
+            result[index++] = num;
+        }
+        return result;
+    }
+}
