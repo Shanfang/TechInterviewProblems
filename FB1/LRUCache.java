@@ -63,6 +63,30 @@ class LRUCache {
     }
 }
 
+
+// use java.util.LinkedHashMap API
+class LRUCache {
+    private int SIZE;
+    private LinkedHashMap<Integer, Integer> map;
+    public LRUCache(int capacity) {
+        SIZE = capacity;
+        map = new LinkedHashMap<Integer, Integer>(SIZE, 0.75f, true) {
+            protected boolean removeEldestEntry(Map.Entry entry) {
+                return size() > SIZE;
+            }
+        };
+    }
+
+    public int get(int key) {
+        return map.getOrDefault(key, -1);
+    }
+
+    public void put(int key, int value) {
+        map.put(key, value);
+    }
+}
+
+
 /**
  * Your LRUCache object will be instantiated and called as such:
  * LRUCache obj = new LRUCache(capacity);
