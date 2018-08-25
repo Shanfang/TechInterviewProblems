@@ -8,7 +8,7 @@ class Solution {
         for (int i = 1; i < prices.length; i++) {
             if (prices[i] < minPrice) {
                 // each time we find a minPrice, only check against this minPrice for the following days, which guarantees the hight prices from previous day are not checked against
-                minPrice = prices[i]; 
+                minPrice = prices[i];
             }
             profit = Math.max(profit, prices[i] - minPrice);
         }
