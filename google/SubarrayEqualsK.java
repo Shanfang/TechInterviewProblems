@@ -1,3 +1,4 @@
+// O(N^2) time complexity
 class Solution {
     public int subarraySum(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
@@ -23,6 +24,7 @@ class Solution {
 }
 
 // no extra space needed
+// O(N^2) time complexity
 class Solution {
     public int subarraySum(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
