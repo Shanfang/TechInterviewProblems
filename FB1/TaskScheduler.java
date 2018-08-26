@@ -28,3 +28,46 @@ class Solution {
         return intervals;
     }
 }
+
+
+// use a max-heap, which is implemented as a priority queue to pick the most outstanding task
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        int[] counts = new int[26];
+        for (char c : tasks) {
+            counts[c- 'A']++;
+        }
+
+        Queue<Integer> maxHeap = new PriorityQueue<>(26, Collections.reverseOrder());
+        for (int count : counts) {
+            if (count != 0) {
+                maxHeap.offer(count);
+            }
+        }
+
+        int intervals = 0;
+        while (!maxHeap.isEmpty()) {
+            List<Integer> list = new ArrayList<>();
+            int timer = 0;
+            while (timer <= n) {
+                if (!maxHeap.isEmpty()) {
+                    if (maxHeap.peek() > 1) {
+                        list.add(maxHeap.poll() - 1);
+                    } else {
+                    maxHeap.poll();
+                    }
+                }
+                intervals++;
+
+                if (maxHeap.isEmpty() && list.size() == 0) {
+                    break;
+                }
+                timer++;
+            }
+            for (int num : list) {
+                maxHeap.offer(num);
+            }
+        }
+        return intervals;
+    }
+}
