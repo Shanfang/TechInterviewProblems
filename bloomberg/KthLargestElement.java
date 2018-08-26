@@ -12,7 +12,7 @@ class Solution {
     }
 }
 
-// quick select, time complexity worse case O(N^2) and best case O(N)
+// quick select, time complexity worse case O(N^2) and average case O(N)
 // without constant extra space
 class Solution {
     public int findKthLargest(int[] nums, int k) {

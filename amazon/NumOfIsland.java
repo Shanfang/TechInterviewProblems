@@ -33,6 +33,7 @@ class Solution {
   public void bfsHelper(int a, int b, char[][] grid) {
     int[] deltaX = {-1, 0, 1, 0};
     int[] deltaY = {0, 1, 0, -1};
+    grid[a][b] = '0';
 
     Queue<Coordinate> queue = new LinkedList<>();
     queue.offer(new Coordinate(a, b));
