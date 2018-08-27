@@ -34,3 +34,26 @@ class Solution {
         return false;
     }
 }
+
+
+// typical DP solution
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if (wordDict == null || wordDict.size() == 0) {
+            return false;
+        }
+
+        Set<String> dict = new HashSet<>(wordDict);
+        int len = s.length();
+        boolean[] canBreak = new boolean[len + 1];
+        canBreak[0] = true;
+        for (int i = 1; i <= len; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dict.contains(s.substring(j, i)) && canBreak[j]) {
+                    canBreak[i] = true;
+                }
+            }
+        }
+        return canBreak[len];
+    }
+}
