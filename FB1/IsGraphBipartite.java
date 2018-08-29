@@ -45,15 +45,20 @@ class Solution {
             return colors[cur] == color; // if it has been painted, it should be the same color we wanna it to be
         }
         colors[cur] = color;
-        for (int i = 0; i < graph[cur].length; i++) {
-            if (colors[graph[cur][i]] == color) {
+        for (int neighbor : graph[cur]) {
+            if (!validPaint(graph, colors, neighbor, -color)) {
                 return false;
-            } else if (colors[graph[cur][i]] == 0) {
-                 if (!validPaint(graph, colors, graph[cur][i], -color)) {
-                     return false;
-                 }
             }
         }
+        // for (int i = 0; i < graph[cur].length; i++) {
+        //     if (colors[graph[cur][i]] == color) {
+        //         return false;
+        //     } else if (colors[graph[cur][i]] == 0) {
+        //          if (!validPaint(graph, colors, graph[cur][i], -color)) {
+        //              return false;
+        //          }
+        //     }
+        // }
         return true;
     }
 }
