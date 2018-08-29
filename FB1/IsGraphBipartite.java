@@ -1,3 +1,4 @@
+// BFS
 class Solution {
     public boolean isBipartite(int[][] graph) {
         int len = graph.length;
@@ -19,6 +20,38 @@ class Solution {
                         return false;
                     }
                 }
+            }
+        }
+        return true;
+    }
+}
+
+// DFS
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int len = graph.length;
+        int[] colors = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            if (colors[i] == 0 && !validPaint(graph, colors, i, 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean validPaint(int[][] graph, int[] colors, int cur, int color) {
+        if (colors[cur] != 0) {
+            return colors[cur] == color; // if it has been painted, it should be the same color we wanna it to be
+        }
+        colors[cur] = color;
+        for (int i = 0; i < graph[cur].length; i++) {
+            if (colors[graph[cur][i]] == color) {
+                return false;
+            } else if (colors[graph[cur][i]] == 0) {
+                 if (!validPaint(graph, colors, graph[cur][i], -color)) {
+                     return false;
+                 }
             }
         }
         return true;
