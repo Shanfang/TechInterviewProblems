@@ -36,6 +36,9 @@ class WordDictionary {
 
             if (c == '.') {
                 for (int k = 0; k < 26; k++) {
+                    // this would start searching from the root, if the . appears at the end of a long string, this is not efficient
+                    // so it is better to use backtracking, start searching from current node and acts like track a binary tree downwards
+                    // checkout the implementation in FB1
                     if (search(word.substring(0, i) + (char)('a' + k) + word.substring(i + 1))) {
                         return true;
                     }
