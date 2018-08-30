@@ -33,7 +33,46 @@ class Solution {
         return result;
     }
 }
+// do binary search on one array
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        if (nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0) {
+            return new int[]{};
+        }
+        Arrays.sort(nums1);
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums2) {
+            if (!set.contains(num) && binarySearch(nums1, num)) {
+                set.add(num);
+            }
+        }
 
+        int[] result = new int[set.size()];
+        int index = 0;
+        for (int num : set) {
+            result[index++] = num;
+        }
+        return result;
+    }
+
+    private boolean binarySearch(int[] nums, int target) {
+        int i = 0, j = nums.length - 1;
+        while (i + 1 < j) {
+            int mid = i + (j - i) / 2;
+            if (nums[mid] == target) {
+                return true;
+            } else if (nums[mid] < target) {
+                i = mid;
+            } else {
+                j = mid;
+            }
+        }
+        if (nums[i] == target || nums[j] == target) {
+            return true;
+        }
+        return false;
+    }
+}
 // two pointers
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
