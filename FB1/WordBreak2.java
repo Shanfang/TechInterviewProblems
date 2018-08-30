@@ -17,7 +17,9 @@ class Solution {
         if (dict.contains(s)) {
             strings.add(s); // do not return here, need to find if S can be further divided!!!
         }
-        for (int i = 1; i <= s.length(); i++) {
+
+        // here rightStr can't be "", otherwise, if the dict contains this empty string, if ends up with infinite loop
+        for (int i = 1; i < s.length(); i++) {
             String leftStr = s.substring(0 , i);
             String rightStr = s.substring(i);
             if (!dict.contains(rightStr)) {
