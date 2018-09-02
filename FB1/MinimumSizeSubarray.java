@@ -1,3 +1,25 @@
+// O(N) time complexity with two pointers
+class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int left = 0, i = 0;
+        int sum = 0;
+        int minLen = Integer.MAX_VALUE;
+        while (i < nums.length) {
+            sum += nums[i];
+            while (sum >= s) {
+                minLen = Math.min(i - left + 1, minLen);
+                sum -= nums[left];
+                left++;
+            }
+            i++;
+        }
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
+    }
+}
 // O(N^2) with prefix sum
 class Solution {
     public int minSubArrayLen(int s, int[] nums) {
