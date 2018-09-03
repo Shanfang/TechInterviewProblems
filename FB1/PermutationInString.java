@@ -1,3 +1,49 @@
+// with better time complexity using slide window than the second approach
+// time complexiyt is  O(L1 + (L2- L1))
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if (s1 == null || s1.length() == 0) {
+            return true;
+        }
+
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : s1.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        int counter = map.size();
+        int start = 0, end = 0;
+        while (end < s2.length()) {
+            char c1 = s2.charAt(end);
+            if (map.containsKey(c1)) {
+                map.put(c1, map.get(c1) - 1);
+                if (map.get(c1) == 0) {
+                    counter--;
+                }
+            }
+            end++;
+
+            while (counter == 0) {
+                if (end - start == s1.length()) {
+                    return true;
+                }
+                char c2 = s2.charAt(start);
+                if (map.containsKey(c2)) {
+                    map.put(c2, map.get(c2) + 1);
+                    if (map.get(c2) > 0) {
+                        counter++;
+                    }
+                }
+                start++;
+            }
+        }
+        return false;
+    }
+}
+
+
+// this approach check the count map every we slide the window by one character
+// time complexity is O(L1 + 26 * (L2- L1))
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
         if (s1 == null || s1.length() == 0) {
