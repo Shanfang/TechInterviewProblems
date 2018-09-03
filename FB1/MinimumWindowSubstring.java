@@ -1,3 +1,52 @@
+// use template from leetcode
+// https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92007/Sliding-Window-algorithm-template-to-solve-all-the-Leetcode-substring-search-problem.
+class Solution {
+    public String minWindow(String s, String t) {
+        if (s == null || s.length() < t.length()) {
+            return "";
+        }
+
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        int start = 0, end = 0;
+        int head = 0;
+        int counter = map.size();
+        int minLen = Integer.MAX_VALUE;
+        while (end < s.length()) {
+            char c = s.charAt(end);
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) - 1);
+                if (map.get(c) == 0) {
+                    counter--;
+                }
+            }
+            end++;
+
+            while (counter == 0) {
+                char c1 = s.charAt(start);
+                if (map.containsKey(c1)) {
+                    map.put(c1, map.get(c1) + 1);
+                    if (map.get(c1) > 0) {
+                        counter++;
+                    }
+                }
+                if (end - start < minLen) {
+                    minLen = end -start;
+                    head = start;
+                }
+                start++;
+            }
+        }
+        if (minLen == Integer.MAX_VALUE) {
+            return "";
+        }
+        return s.substring(head, head + minLen);
+    }
+}
+
 class Solution {
     public String minWindow(String s, String t) {
         if (s == null || s.length() == 0 || t == null || t.length() == 0) {
