@@ -1,3 +1,26 @@
+// slide window
+class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        int start = 0, end = 0;
+        int sum = 0;
+        int minLen = Integer.MAX_VALUE;
+        while (end < nums.length) {
+            sum += nums[end];
+            end++;
+
+            while (sum >= s) {
+                minLen = Math.min(minLen, end - start);
+                sum -= nums[start];
+                start++;
+            }
+        }
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
+    }
+}
 // O(N) time complexity with two pointers
 class Solution {
     public int minSubArrayLen(int s, int[] nums) {
