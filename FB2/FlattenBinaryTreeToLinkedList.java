@@ -7,6 +7,12 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+ // this problem is actually same as flatten a linked list with child pointer
+ //(we can treat it as a left pointer in binary tree), the requirement is:
+ // 1. if there is a child for a node, flatten its child list before proceed to next node
+ // which in fact is process all left subtree before processing right subtree in binary tree preorder traversal
+
 // preorder traversal
 class Solution {
     public void flatten(TreeNode root) {
