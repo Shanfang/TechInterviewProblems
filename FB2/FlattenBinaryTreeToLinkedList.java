@@ -7,6 +7,31 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+// preorder traversal
+class Solution {
+    public void flatten(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeNode dummy = new TreeNode(0);
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            dummy.right = node;
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+            node.left = null;
+            dummy = node;
+        }
+    }
+}
+
+ // recursive approach, return last node in a flattened list
 class Solution {
     public void flatten(TreeNode root) {
         if (root == null) {
