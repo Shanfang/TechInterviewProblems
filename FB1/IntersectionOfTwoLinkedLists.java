@@ -9,6 +9,49 @@
  *     }
  * }
  */
+
+ // attach two lists to check if circle exists
+ public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        ListNode cur = headA;
+        while (cur.next != null) {
+            cur = cur.next;
+        }
+        cur.next = headB;
+
+        ListNode node = circleDetect(headA);
+        cur.next = null;
+        return node != null ? node : null;
+    }
+
+    private ListNode circleDetect(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != fast) {
+            if (fast == null || fast.next == null) {
+                return null;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow = head;
+        fast = fast.next;
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
+}
+
+ // count length then walk long list ahead of time
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) {
