@@ -13,12 +13,15 @@ class Solution {
         }
         for (char c : t.toCharArray()) {
             counter[c - 'a']--;
-        }
-        for (int i = 0; i < 26; i++) {
-            if (counter[i] != 0) {
+            if (counter[c - 'a'] < 0) {
                 return false;
             }
         }
+        // for (int i = 0; i < 26; i++) {
+        //     if (counter[i] != 0) {
+        //         return false;
+        //     }
+        // }
         return true;
     }
 }
