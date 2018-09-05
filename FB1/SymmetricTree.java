@@ -7,7 +7,30 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+// recursive approach
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return true;
+        }
+        if (root.left == null || root.right == null) {
+            return false;
+        }
+        return isSymPair(root.left, root.right);
+    }
 
+    private boolean isSymPair(TreeNode a, TreeNode b) {
+        if (a == null && b == null) {
+            return true;
+        }
+        if (a == null || b == null || a.val != b.val) {
+            return false;
+        }
+        return isSymPair(a.left, b.right) && isSymPair(a.right, b.left);
+    }
+}
+
+// iterative approach
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         if (root == null) {
