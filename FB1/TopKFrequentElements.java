@@ -29,6 +29,35 @@ class Solution {
         return result;
     }
 }
+
+// use treemap
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        List<Integer> result = new ArrayList<>();
+        if (nums == null || nums.length == 0) {
+            return result;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+
+        TreeMap<Integer, List<Integer>> freqMap = new TreeMap<>();
+        for (int key : map.keySet()) {
+            int freq = map.get(key);
+            if (!freqMap.containsKey(freq)) {
+                freqMap.put(freq, new ArrayList<>());
+            }
+            freqMap.get(freq).add(key);
+        }
+
+        while (result.size() < k) {
+            Map.Entry<Integer, List<Integer>> entry = freqMap.pollLastEntry();
+            result.addAll(entry.getValue());
+        }
+        return result;
+    }
+}
 // use minHeap to find top k, this is a bit slow
 class Solution {
     class Pair {
@@ -49,11 +78,14 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
-        Queue<Pair> queue = new PriorityQueue<>(new Comparator<Pair>() {
-            public int compare(Pair a, Pair b) {
-                return a.freq - b.freq;
-            }
-        });
+        // Queue<Pair> queue = new PriorityQueue<>(new Comparator<Pair>() {
+        //     public int compare(Pair a, Pair b) {
+        //         return a.freq - b.freq;
+        //     }
+        // });
+
+        // use more concise version of comparator
+        Queue<Pair> queue = new PriorityQueue<>((a, b) -> a.freq - b.freq);
         for (int key : map.keySet()) {
             queue.offer(new Pair(key, map.get(key)));
             if(queue.size() > k) {
