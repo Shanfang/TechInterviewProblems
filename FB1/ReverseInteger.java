@@ -1,3 +1,7 @@
+// in math, mod always returns non-negative number
+// but in java, it returns remainder, which could be negative
+// so in the following solution we take advange of this trick,
+// it would not work if mod always return >=0 numbers
 class Solution {
     public int reverse(int x) {
         long num = 0;
