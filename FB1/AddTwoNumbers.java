@@ -28,20 +28,28 @@ class Solution {
             tail = node;
             carry = (sum + carry) / 10;
         }
-        while (!stack1.isEmpty()) {
-            int sum = carry + stack1.pop().val;
-            ListNode node = new ListNode(sum % 10);
+        while (!stack1.isEmpty() || !stack2.isEmpty()) {
+            int num1 = stack1.isEmpty() ? 0 : stack1.pop().val;
+            int num2 = stack2.isEmpty() ? 0 : stack2.pop().val;
+            ListNode node = new ListNode((num1 + num2 + carry ) % 10);
             node.next = tail;
             tail = node;
-            carry = sum / 10;
+            carry = (num1 + num2 + carry ) / 10;
         }
-        while (!stack2.isEmpty()) {
-            int sum = carry + stack2.pop().val;
-            ListNode node = new ListNode(sum % 10);
-            node.next = tail;
-            tail = node;
-            carry = sum / 10;
-        }
+        // while (!stack1.isEmpty()) {
+        //     int sum = carry + stack1.pop().val;
+        //     ListNode node = new ListNode(sum % 10);
+        //     node.next = tail;
+        //     tail = node;
+        //     carry = sum / 10;
+        // }
+        // while (!stack2.isEmpty()) {
+        //     int sum = carry + stack2.pop().val;
+        //     ListNode node = new ListNode(sum % 10);
+        //     node.next = tail;
+        //     tail = node;
+        //     carry = sum / 10;
+        // }
         if (carry != 0) {
             ListNode node = new ListNode(carry);
             node.next = tail;
