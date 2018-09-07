@@ -1,3 +1,69 @@
+// improved by storing word in the last trie node in the path, mark it null if visited
+class Solution {
+    class TrieNode{
+        TrieNode[] children;
+        String word;
+        TrieNode() {
+            children = new TrieNode[26];
+        }
+    }
+    public List<String> findWords(char[][] board, String[] words) {
+        TrieNode root = new TrieNode();
+
+        for (String word : words) {
+            insertWord(root, word);
+        }
+
+        List<String> result = new ArrayList<>();
+        for (int i = 0 ; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                dfs(board, i, j, root, result);
+            }
+        }
+        return result;
+    }
+
+    private void insertWord(TrieNode root, String str) {
+        TrieNode cur = root;
+        for (char c : str.toCharArray()) {
+            if (cur.children[c- 'a'] == null) {
+                cur.children[c - 'a'] = new TrieNode();
+            }
+            cur = cur.children[c - 'a'];
+        }
+        cur.word = str;
+    }
+    int[] dx = {-1, 0, 1, 0};
+    int[] dy = {0, 1, 0, -1};
+    private void dfs(char[][] board, int i, int j, TrieNode cur, List<String> result) {
+        char c = board[i][j];
+        if (c == '#' || cur.children[c - 'a'] == null) {
+            return;
+        }
+        cur = cur.children[c - 'a'];
+        if (cur.word != null) {
+            result.add(cur.word);
+            cur.word = null;
+        }
+
+        board[i][j] = '#';
+        for (int k = 0; k < 4; k++) {
+            int newX = i + dx[k];
+            int newY = j + dy[k];
+            if (inBound(board, newX, newY)) {
+                dfs(board, newX, newY, cur, result);
+            }
+        }
+        board[i][j] = c;
+    }
+
+    private boolean inBound(char[][] board, int i, int j) {
+        return i >= 0 && i < board.length && j >= 0 && j < board[i].length;
+    }
+}
+
+
+
 // use StringBuilder and Trie class
 class Solution {
     class TrieNode {
@@ -30,9 +96,6 @@ class Solution {
             TrieNode cur = root;
 
             for (char c : word.toCharArray()) {
-                if (c < 'a' || c > 'z') {
-                    return false;
-                }
                 if (cur.children[c - 'a'] == null) {
                     return false;
                 }
@@ -98,6 +161,7 @@ class Solution {
         }
     }
 }
+
 
 /*
     when doing dfs, if we need to check some conditions before go deep into next recursion
