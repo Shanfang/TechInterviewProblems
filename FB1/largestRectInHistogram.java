@@ -1,3 +1,37 @@
+// use divide and conquer
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        if (heights == null || heights.length == 0) {
+            return 0;
+        }
+
+        return findArea(heights, 0, heights.length - 1);
+    }
+
+    private int findArea(int[] heights, int start, int end) {
+        if (start > end) {
+            return 0;
+        }
+        int minHeightIndx = findMinHeight(heights, start, end);
+
+        int midPart = heights[minHeightIndx] * (end - start + 1);
+        int leftPart = findArea(heights, start, minHeightIndx - 1);
+        int rightPart = findArea(heights, minHeightIndx + 1, end);
+        return Math.max(Math.max(leftPart, rightPart), midPart);
+    }
+
+    private int findMinHeight(int[] heights, int start, int end) {
+        int min = start;
+        int i = start;
+        while (i <= end) {
+            if (heights[i] < heights[min]) {
+                min = i;
+            }
+            i++;
+        }
+        return min;
+    }
+}
 // o(n^2) time complexity
 class Solution {
     public int largestRectangleArea(int[] heights) {
