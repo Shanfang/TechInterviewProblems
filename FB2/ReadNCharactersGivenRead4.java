@@ -29,6 +29,34 @@ public class Solution extends Reader4 {
   }
 }
 
+// based on the two cases that we will stop calling the API
+public class Solution extends Reader4 {
+    /**
+     * @param buf Destination buffer
+     * @param n   Maximum number of characters to read
+     * @return    The number of characters read
+     */
+    public int read(char[] buf, int n) {
+        char[] buffer = new char[4];
+        int index = 0;
+        int start = 0;
+        while (index < n) {
+            int count = read4(buffer);
+            if (count == 0) {
+                break;
+            }
+            while (index < n && start < count) {
+                buf[index++] = buffer[start++];
+            }
+            if (index == n) {
+                break;
+            }
+            start = 0;
+        }
+        return index;
+    }
+}
+
 public class Solution extends Reader4 {
     /**
      * @param buf Destination buffer
