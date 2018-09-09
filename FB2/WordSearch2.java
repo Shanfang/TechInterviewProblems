@@ -1,4 +1,6 @@
 // improved by storing word in the last trie node in the path, mark it null if visited
+// NOTE:  the dfs base case is: either we are at a visited position, or we readed the end of the path in trie
+// we can't return after find one word!!! it is possible there are other words along the path downwards
 class Solution {
     class TrieNode{
         TrieNode[] children;
@@ -43,7 +45,7 @@ class Solution {
         cur = cur.children[c - 'a'];
         if (cur.word != null) {
             result.add(cur.word);
-            cur.word = null;
+            cur.word = null; // can't return after find this word
         }
 
         board[i][j] = '#';
