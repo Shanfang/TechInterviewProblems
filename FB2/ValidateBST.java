@@ -61,3 +61,30 @@
          return new Triple(Math.min(root.val, leftSub.minVal), Math.max(root.val, rightSub.maxVal), true);
      }
  }
+
+// use inorder traversal
+class Solution {
+   public boolean isValidBST(TreeNode root) {
+       if (root == null) {
+           return true;
+       }
+
+       Stack<TreeNode> stack = new Stack<>();
+       TreeNode pre = null;
+       TreeNode node = root;
+       while(node != null || !stack.isEmpty()) {
+           while (node != null) {
+               stack.push(node);
+               node = node.left;
+           }
+
+           node = stack.pop();
+           if (pre != null && pre.val >= node.val) {
+               return false;
+           }
+           pre = node;
+           node = node.right;
+       }
+       return true;
+   }
+}
