@@ -1,4 +1,4 @@
-// with two pointers
+// with two pointers, prefered if two arrays are already sorted, otherwise need to sort with O(NlogN)
 //  need to sort both arrays, time complexity if O(NlogN)
 // the result is not ordered, since in the end we iterate over the set to get the result
 class Solution {
@@ -32,7 +32,8 @@ class Solution {
     }
 }
 
-// binary search from a longer array
+// binary search from a longer array, time complexity O(NlogN)
+// prefered if arrays are not sorted and one array is very long while the other is pretty short
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) {
@@ -75,5 +76,42 @@ class Solution {
             }
         }
         return nums[start] == target || nums[end] == target;
+    }
+}
+
+
+// O(N) time complexity, but high space complexity
+// preferred for the cases when there are lot of duplicates in both or one of the arrays
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) {
+            return new int[0];
+        }
+
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        if (len1 > len2) {
+            return intersection(nums2, nums1);
+        }
+        Set<Integer> set1 = new HashSet<>();
+        for (int num : nums1) {
+            if (!set1.contains(num)) {
+                set1.add(num);
+            }
+        }
+
+        Set<Integer> set2 = new HashSet<>();
+        for(int num :  nums2) {
+            if (set1.contains(num)) {
+                set2.add(num);
+            }
+        }
+        int size = set2.size();
+        int[] result = new int[size];
+        int index = 0;
+        for (int num : set2) {
+            result[index++] = num;
+        }
+        return result;
     }
 }
