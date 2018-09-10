@@ -1,6 +1,6 @@
 // dot is more strict than e. Two scenarioes are not allowed:
 // 1. two dots are not allowed
-// 2. e is not allowed before.
+// 2. e is not allowed before it.
 // thus, when we see a dot, we need to check the following cases
 
 // e is slightly less strict. We only need to check if there are more than one E in the string
