@@ -7,6 +7,36 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ // non-recursive approach with BFS
+  class Solution {
+     public List<String> binaryTreePaths(TreeNode root) {
+         List<String> result = new ArrayList<>();
+         if (root == null) {
+             return result;
+         }
+         Queue<TreeNode> nodeQ = new LinkedList<>();
+         Queue<String> pathQ = new LinkedList<>();
+         nodeQ.offer(root);
+         pathQ.offer("" + root.val);
+         while (!nodeQ.isEmpty()) {
+             TreeNode node = nodeQ.poll();
+             String path = pathQ.poll();
+             if (node.left == null && node.right == null) {
+                 result.add(path);
+             }
+
+             if (node.left != null) {
+                 nodeQ.offer(node.left);
+                 pathQ.offer(path + "->" + node.left.val);
+             }
+             if (node.right != null) {
+                 nodeQ.offer(node.right);
+                 pathQ.offer(path + "->" + node.right.val);
+             }
+         }
+         return result;
+     }
+ }
  // stringbuilder issue resolved!!!
  class Solution {
      public List<String> binaryTreePaths(TreeNode root) {
