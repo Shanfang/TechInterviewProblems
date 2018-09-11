@@ -20,7 +20,9 @@ class Solution {
         for (int i = 1; i < intervals.length; i++) {
             Interval head = minHeap.poll();
             if (intervals[i].start >= head.end) {
-                head.end = Math.max(head.end, intervals[i].end);
+                head.end = intervals[i].end;
+                // cur's start is already behind head.end, so the end is guaranteed to be late than cur interval's end
+                // head.end = Math.max(head.end, intervals[i].end);
             } else {
                 minHeap.offer(intervals[i]);
             }
