@@ -7,8 +7,38 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ // stringbuilder issue resolved!!!
+ class Solution {
+     public List<String> binaryTreePaths(TreeNode root) {
+         List<String> result = new ArrayList<>();
+         if (root == null) {
+             return result;
+         }
+         helper(root, new StringBuilder(), result);
+         return result;
+     }
+     private void helper(TreeNode root, StringBuilder sb, List<String> result) {
+         int len = sb.length();
+
+         if (root.left == null && root.right == null) {
+             result.add(sb.append(root.val).toString());
+             sb.delete(len, sb.length());
+             return;
+         }
+
+         sb.append(root.val).append("->");
+         if (root.left != null) {
+            helper(root.left, sb, result);
+         }
+         if (root.right != null) {
+            helper(root.right, sb, result);
+         }
+         sb.delete(len, sb.length());
+     }
+ }
+ // recursive approach
 // 1. a binary tree path is from root to leaf node, for leaf node BOTH its left and right child should be null
-// 2. do not use stringbuilder here, we need to since there is no way to do a deep copy like arraylist, so the
+// 2.(check the above solution, there is workaround) do not use stringbuilder here, we need to since there is no way to do a deep copy like arraylist, so the
 // path from left subtree will pesent in rightsubtree!!
 // 3. for bianry tree path and depth. All end at leaf node, so if only one child is null, do not stop
   class Solution {
@@ -36,7 +66,7 @@
       }
   }
 
- // simple recursive approach
+ // simple divide and conquer approach
 class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new ArrayList<>();
