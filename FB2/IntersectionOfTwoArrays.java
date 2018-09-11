@@ -32,8 +32,8 @@ class Solution {
     }
 }
 
-// binary search from a longer array, time complexity O(NlogN)
-// prefered if arrays are not sorted and one array is very long while the other is pretty short
+// binary search from one of the arrays, time complexity O(NlogN)
+// same as poitners approach in time complexity and space complexity
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) {

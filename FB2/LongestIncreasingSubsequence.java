@@ -1,3 +1,25 @@
+// O(NlogN) with binary search to find the insertion position
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int[] dp = new int[nums.length];
+        int len = 0; // len is the next available space to put the next larger number
+        for (int num : nums) {
+            int pos = Arrays.binarySearch(dp, 0, len, num);
+            if (pos < 0) {
+                pos = -(pos + 1);
+            }
+            dp[pos] = num;
+            if (pos == len) {
+                len++;
+            }
+        }
+        return len;
+    }
+}
+// O(N^2) time complexity
 class Solution {
     public int lengthOfLIS(int[] nums) {
         if (nums == null || nums.length == 0) {
