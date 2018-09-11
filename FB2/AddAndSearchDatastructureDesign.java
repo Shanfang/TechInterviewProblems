@@ -45,7 +45,9 @@ class WordDictionary {
             } else {
                 for (int j = 0; j < 26; j++) {
                     String newWord = word.substring(0, i) + (char)('a' + j) + word.substring(i + 1);
-                    if (searchWord(root, newWord)) {
+                    String newWord = (char)('a' + j) + word.substring(i + 1);
+                    if (searchWord(node, newWord)) { // no need to start from root, continue searching from current node
+                    //if (searchWord(root, newWord)) {
                         return true;
                     }
                 }
