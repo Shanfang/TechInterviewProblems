@@ -54,6 +54,8 @@ public class CompareTwoStrings {
                  } else {
                      return num1 - num2 < 0 ? -1 : 1;
                  }
+                 num1 = 0;
+                 num2 = 0; // need to reset these two numbers, in case there are numbers afterwards
              } else {
                  return c1 - c2 < 0 ?  -1 : 1;
              }
