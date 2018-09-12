@@ -48,9 +48,6 @@ public class Solution extends Reader4 {
             while (index < n && start < count) {
                 buf[index++] = buffer[start++];
             }
-            if (index == n) {
-                break;
-            }
             start = 0;
         }
         return index;
