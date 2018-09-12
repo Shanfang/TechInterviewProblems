@@ -69,10 +69,16 @@ public class sortDataStreams {
 
             if (head1 == capacity) {
                 readData(buf1, 1);
+                for (int num : buf1) {
+                    minHeap.offer(new Pair(num, 1));
+                }
                 head1 = 0;
             }
             if (head2 == capacity) {
                 readData(buf2, 2);
+                for (int num : buf2) {
+                    minHeap.offer(new Pair(num, 2));
+                }
                 head2 = 0;
             }
 
