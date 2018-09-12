@@ -61,6 +61,9 @@ public class AddTwoDecimalStrings {
                 break;
             }
         }
+        if (k < sb.length() && sb.charAt(k) == '.') {
+            sb.deleteCharAt(k);
+        }
         return sb.reverse().toString();
     }
 
