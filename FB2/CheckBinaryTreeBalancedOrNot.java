@@ -9,6 +9,37 @@
  *     }
  * }
  */
+// LC110
+ // no need for Pair class
+ class Solution {
+     boolean isBalanced = true;
+     public boolean isBalanced(TreeNode root) {
+         if (root == null) {
+             return true;
+         }
+         int leftD = findDepth(root.left);
+         int rightD =findDepth(root.right);
+         if (Math.abs(leftD - rightD) > 1) {
+             return false;
+         }
+         return isBalanced;
+     }
+
+     private int findDepth(TreeNode root) {
+         if (root == null) {
+             return 0;
+         }
+
+         int leftD = findDepth(root.left);
+         int rightD = findDepth(root.right);
+
+         if (Math.abs(leftD - rightD) > 1){
+             isBalanced = false;
+         }
+         return Math.max(leftD, rightD) + 1;
+     }
+ }
+
 class Pair {
     int height;
     boolean isBalanced;
