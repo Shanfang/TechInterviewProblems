@@ -1,3 +1,42 @@
+// faster without hashmap
+
+class Solution {
+    public int romanToInt(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        int sum = 0;
+        char[] chars = s.toCharArray();
+        int pre = convert(chars[0]);
+        int cur = 0;
+        sum = pre;
+
+        for (int i = 1; i < s.length(); i++) {
+            cur = convert(chars[i]);
+            sum += cur;
+            if (cur > pre) {
+                sum -= 2 * pre;
+            }
+            pre = cur;
+        }
+        return sum;
+    }
+
+    private int convert(char c) {
+        switch (c) {
+            case 'I' : return 1;
+            case 'V' : return 5;
+            case 'X' : return 10;
+            case 'L' : return 50;
+            case 'C' : return 100;
+            case 'D' : return 500;
+            case 'M' : return 1000;
+        }
+        return 0;
+    }
+}
+
 class Solution {
     public int romanToInt(String s) {
         if (s == null || s.length() == 0) {
