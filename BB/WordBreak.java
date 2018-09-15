@@ -1,3 +1,4 @@
+// memoization
 class Solution {
     Map<String, Boolean> memo = new HashMap<>();
     public boolean wordBreak(String s, List<String> wordDict) {
@@ -25,6 +26,28 @@ class Solution {
         }
         memo.put(str1, false);
         return false;
+    }
+}
+
+
+// DP
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if (wordDict == null || wordDict.size() == 0) {
+            return false;
+        }
+        Set<String> dict = new HashSet<>(wordDict);
+        boolean[] isBreak = new boolean[s.length() + 1];
+        isBreak[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (isBreak[j] && dict.contains(s.substring(j, i))) {
+                    isBreak[i] = true;
+                    break;
+                }
+            }
+        }
+        return isBreak[s.length()];
     }
 }
 
