@@ -1,3 +1,33 @@
+// use two pointers
+class Solution {
+    public int findPairs(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k < 0) {
+            return 0;
+        }
+
+        Arrays.sort(nums);
+        int start = 0, end = 1;
+        int count = 0;
+        while (start < end && end < nums.length) {
+            if (nums[end] - nums[start] < k) {
+                end++;
+            } else {
+                if (nums[end] - nums[start] == k) {
+                    if (start == 0 || nums[start] != nums[start - 1]) {
+                        count++;
+                    }
+                }
+                start++;
+                if (start == end) {
+                    end++;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+// use hashmap
 class Solution {
     public int findPairs(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k < 0) {
