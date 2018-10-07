@@ -1,6 +1,8 @@
 import java.util.*;
 class StringPermutations {
     // this is the version I came up during the interview
+    // this only works if the string does not have duplicate chars
+    // otherwise, map should increment/decrement, checkout StringPermutations2    
     public List<String> allAnagrams(String str) {
         List<String> result = new ArrayList<>();
         if (str == null) {
