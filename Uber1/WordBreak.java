@@ -29,6 +29,34 @@ class Solution {
     }
 }
 
+// use BFS
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if (wordDict == null || wordDict.size() == 0) {
+            return false;
+        }
+        Set<String> dict = new HashSet<>(wordDict);
+        boolean[] processed = new boolean[s.length()];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(0);
+        while (!queue.isEmpty()) {
+            int start = queue.poll();
+            if (!processed[start]) {
+                for (int i = start + 1; i <= s.length(); i++) {
+                    if (dict.contains(s.substring(start, i))) {
+                        queue.offer(i);
+                        if (i == s.length()) {
+                            return true;
+                        }
+                    }
+                }
+                processed[start] = true;
+            }
+        }
+        return false;
+    }
+}
+
 // recursion, will cause TLE!!
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
