@@ -1,3 +1,24 @@
+// bit voting
+class Solution {
+    public int majorityElement(int[] nums) {
+        int len = nums.length;
+        int majority = 0;
+        for (int i = 0; i < 32; i++) {
+            int mask = 1 << i;
+            int count = 0;
+            for (int num : nums) {
+                if ((num & mask) != 0) {
+                    count++;
+                }
+            }
+            if (count > len / 2) {
+                majority |= mask; // make this bit 1
+            }
+        }
+        return majority;
+    }
+}
+
 // divide and conquer
 class Solution {
     public int majorityElement(int[] nums) {
