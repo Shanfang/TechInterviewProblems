@@ -7,6 +7,34 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ // BST preorder traversal
+ class Solution {
+     public boolean isValidBST(TreeNode root) {
+         if (root == null) {
+             return true;
+         }
+
+         Stack<TreeNode> stack = new Stack<>();
+         TreeNode node = root;
+         TreeNode pre = null;
+         while (!stack.isEmpty() || node != null) {
+             while (node != null) {
+                 stack.push(node);
+                 node = node.left;
+             }
+
+             node = stack.pop();
+             if (pre != null && pre.val >= node.val) {
+                 return false;
+             }
+             pre = node;
+             node = node.right;
+         }
+         return true;
+     }
+ }
+
+ // be careful about the secnario that one child is null
 class Solution {
     class Triple {
         int minVal;
