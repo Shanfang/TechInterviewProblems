@@ -1,3 +1,44 @@
+// union find
+class Solution {
+    public int countComponents(int n, int[][] edges) {
+        if (n <= 1) {
+            return n;
+        }
+        int[] roots = new int[n];
+        for (int i = 0; i < n; i++) {
+            roots[i] = i;
+        }
+
+        int count = n;
+        for (int i = 0; i < edges.length; i++) {
+            int node1 = edges[i][0];
+            int node2 = edges[i][1];
+            int root1 = findRoot(roots, node1);
+            int root2 = findRoot(roots, node2);
+            if (root1 != root2) {
+                count--;
+                roots[root1] = root2;
+            }
+        }
+        return count;
+    }
+
+    private int findRoot(int[] roots, int node) {
+        int temp = node;
+        while (roots[node] != node) {
+            node = roots[node];
+        }
+
+        while (roots[temp] != node) {
+            int parent = roots[temp];
+            roots[temp] = node;
+            temp = parent;
+        }
+        return node;
+    }
+}
+
+// build graph then traversal
 class Solution {
     public int countComponents(int n, int[][] edges) {
         Map<Integer, List<Integer>> graph = buildGraph(edges, n);
