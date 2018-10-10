@@ -7,7 +7,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
- // BST preorder traversal
+ // BST inorder traversal
  class Solution {
      public boolean isValidBST(TreeNode root) {
          if (root == null) {
