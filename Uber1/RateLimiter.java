@@ -1,30 +1,30 @@
+import java.util.*;
+
 class RateLimiter {
-    private int speedLimit;
-    private int tokens;
-    private long timestamp;
-
-    RateLimiter(int tokensPerSecond) {
-        this.speedLimit = tokensPerSecond;
-        this.timestamp = System.currentTimeMillis();
+    int limit;
+    Queue<Double> queue;
+    RateLimiter(int limit) {
+        this.limit = limit;
+        queue = new LinkedList<>();
     }
 
-    public boolen acceptRqst() {
-        long now = System.currentTimeMillis();
-        tokens += (now - timestamp) * speedLimit / 1000;
-        if (tokens > speedLimit) {
-            tokens = speedLimit;
+    public boolean request(double curTime) {
+        while (queue.size() != 0 && curTime - queue.peek() > 1) {
+            queue.poll();
+        }
+        if (queue.size() >= limit) {
             return false;
         }
-        timestamp = now;
+        queue.offer(curTime);
         return true;
     }
 
-    private boolean consumeToken(int consumeNum) {
-        if (tokens < consumeNum) {
-            return false;
-        } else {
-            tokens -= consumeNum;
+    public static void main(String[] args) {
+        RateLimiter limiter = new RateLimiter(5);
+        Double[] arr = {0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 1.01};
+        for (int i = 0; i < arr.length; i++) {
+            boolean status = limiter.request(arr[i]);
+            System.out.println("Request status: " + status);
         }
-        return true;
     }
 }
