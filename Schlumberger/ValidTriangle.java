@@ -4,7 +4,7 @@ class ValidTriangle {
             return "Invalid";
         } else if (a == b && b == c) {
             return "Equilateral";
-        } else if (a == b || b== c) {
+        } else if (a == b || b == c || a == c) {
             return "Isosceles";
         } else {
             return "Scalene";
