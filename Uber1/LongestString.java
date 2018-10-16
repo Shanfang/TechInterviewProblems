@@ -13,10 +13,11 @@ class LongestString {
         int maxLen = 0;
         String result = "";
         for (int i = 0; i < list.size(); i++) {
-            int[] counter = new int[26];
-            for (int j = 0; j < 26; j++) {
-                counter[j] = map[j];
-            }
+            int[] counter = map.clone(); // this is shallow copy for primitive tpyes
+            //int[] counter = new int[26];
+            // for (int j = 0; j < 26; j++) {
+            //     counter[j] = map[j];
+            // }
 
             String str1 = list.get(i);
             for (char c : str1.toCharArray()) {
