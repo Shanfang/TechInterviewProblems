@@ -29,9 +29,11 @@ class CutMessage {
         return result;
     }
 
+    private static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
-        String str = "Hey Alice, your Uber is arriving now!";
+        //String str = "Hey Alice, your Uber is arriving now!";
         //String str = "a b";
+        String str = input.nextLine().trim();
         for (String msg : getMsgs(str, 20)) {
             System.out.println(msg);
         }
