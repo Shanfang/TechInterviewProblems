@@ -1,4 +1,33 @@
-// use PriorityQueue
+// space efficient
+class Solution {
+    public int minMeetingRooms(Interval[] intervals) {
+        if (intervals == null || intervals.length == 0) {
+            return 0;
+        }
+
+        int[] starts = new int[intervals.length];
+        int[] ends = new int[intervals.length];
+        for (int i = 0; i < intervals.length; i++) {
+            starts[i] = intervals[i].start;
+            ends[i] = intervals[i].end;
+        }
+
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+        int count = 0;
+        int j = 0;
+        for (int i = 0; i < intervals.length; i++) {
+            if (starts[i] < ends[j]) {
+                count++;
+            } else {
+                j++;
+            }
+        }
+        return count;
+    }
+}
+
+// use PriorityQueue, takes O(N) space
 // since we need to keep track of all existing rooms, a single variable to hold the earlist end time is not enough
 /**
  * Definition for an interval.
