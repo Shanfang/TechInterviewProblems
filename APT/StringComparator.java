@@ -25,20 +25,23 @@ class StringComparator {
                     i++;
                     j++;
                     continue;
+                } else if (c1 == '.' || c2 == '.') {
+                    return c1 == '.' ? -1 : 1;
                 }
                 return c1 - c2 < 0 ? -1 : 1;
             }
         }
-        if (i == str1.length() && j == str2.length()) {
-            return 0;
-        } else {
-            return i == str1.length() ? -1 : 1;
-        }
+        // if (i == str1.length() && j == str2.length()) {
+        //     return 0;
+        // } else {
+        //     return i == str1.length() ? -1 : 1;
+        // }
+        return 0;
     }
 
     public static void main(String[] args) {
-        String s1 = "apple2.txt";
-        String s2 = "apple10.txt";
+        String s1 = "appl1.txt";
+        String s2 = "apple.txt";
         System.out.println(compare(s1, s2));
     }
 }
