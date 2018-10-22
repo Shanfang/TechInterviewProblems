@@ -9,7 +9,6 @@ class Solution {
                 parents[i] = i;
             }
         }
-
         public int find(int x) {
             if (parents[x] != x) {
                 parents[x] = find(parents[x]);
