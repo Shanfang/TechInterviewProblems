@@ -22,8 +22,8 @@ class SlideWindowMin {
     }
 
     private static void push(Deque<Integer> deque, int num) {
-        if (deque.isEmpty() || deque.peekLast() > num) {
-            deque.pollLast();
+        if (!deque.isEmpty() && deque.peekLast() > num) {
+            deque.pollLast();// pollLast will retrun null is deque is empty
         }
         deque.offer(num);
     }
@@ -36,6 +36,7 @@ class SlideWindowMin {
 
     public static void main(String[] args) {
         int[] arr = {1,1,1,2,3,7,3,2,0,5};
+        //int[] arr = {1,2,3,4,5,6};
         int[] result = window(arr, 3);
         for(int num : result) {
             System.out.println(num);
