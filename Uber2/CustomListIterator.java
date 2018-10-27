@@ -1,11 +1,15 @@
 import java.util.*;
 
-public class CustomListIterator implements Iterable<String>, Iterator<String> {
+class CustomListIterator implements Iterable<String>, Iterator<String> {
     private int index;
-    private final ArrayList<String> list;
-    CustomListIterator (List<String> l) {
+    private List<String> list;
+    CustomListIterator () {
         this.index = 0;
-        this.list = l;
+        this.list = new ArrayList<>();
+    }
+    public void add(String str) {
+        list.add(str);
+        index++;
     }
 
     public Iterator<String> iterator() {
@@ -17,7 +21,7 @@ public class CustomListIterator implements Iterable<String>, Iterator<String> {
             index++;
             return list.get(index - 1);
         }
-        throw new Exception("No more element");
+        return "No more element";
     }
 
     public boolean hasNext() {
@@ -27,51 +31,15 @@ public class CustomListIterator implements Iterable<String>, Iterator<String> {
         return false;
     }
 
-// class List implements Iterable<String> {
-//     private int index;
-//     private List<String> list;
-//     List() {
-//         this.list = new ArrayList<>();
-//     }
-//     public Iterator<String> Iterator() {
-//         return new ListIterator<String>(this);
-//     }
-// }
-    public static void main(String args[] ) throws Exception {
-        String[] strs = {"a", "b", "c"};
-        // List<String> list = new ArrayList<>();
-        // list.add("a");
-        // list.add("b");
-        // list.add("c");
-        ArrayList<String> list = new ArrayList(Arrays.asList(strs));
-        //ListIterator<String> it = list.Iterator();
-        CustomListIterator custom = new CustomListIterator(list);
+    public static void main(String args[]) {
+        CustomListIterator custom = new CustomListIterator();
+        custom.add("a");
+        custom.add("b");
+        custom.add("c");
         Iterator it = custom.iterator();
 
         while (it.hasNext()) {
             System.out.println(it.next());
         }
-
-        try {
-            it.next();
-        } catch( Exception e) {
-            System.out.println(e);
-        }
-
-        // Iterator it = new Iterator(Arrays.asList(strs));
-        // while (it.hasNext()) {
-        //     System.out.println(it.next());
-        // }
-        //
-        // try {
-        //     it.next();
-        // } catch( Exception e) {
-        //     System.out.println(e);
-        // }
-        //
-        //
-        // 1,2,3
-        // 4,5
-        // 6,6
     }
 }
