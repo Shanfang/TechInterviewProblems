@@ -17,7 +17,10 @@ class CountHosts {
             scanner = new Scanner(new File(path));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] strs = line.split("--");
+                String[] strs = line.split("- -");
+                // int index = line.indexOf("- -");
+                // String host = line.substring(0, index);
+                //map.put(host, map.getOrDefault(host, 0) + 1);
                 map.put(strs[0], map.getOrDefault(strs[0], 0) + 1);
             }
 
