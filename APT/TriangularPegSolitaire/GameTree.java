@@ -1,4 +1,3 @@
-package play;
  import java.util.List;
  import java.util.ArrayList;
  import board.*;
@@ -33,4 +32,4 @@ package play;
    public int numChildren() {
             return children.size();
       }
-} 
+}
