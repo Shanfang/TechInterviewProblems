@@ -1,3 +1,36 @@
+// one pass with direction flags
+class Solution {
+    public int longestMountain(int[] A) {
+        if (A == null || A.length == 0) {
+            return 0;
+        }
+        int index = 0;
+        int left = 0;
+        boolean upward = false;
+        boolean downward = false;
+        int max = 0;
+        while (index < A.length - 1) {
+            index = left;
+            while (index + 1 < A.length && A[index] < A[index + 1]) {
+                index++;
+                upward = true;
+            }
+            while (upward && index + 1 < A.length && A[index] > A[index + 1]) {
+                index++;
+                downward = true;
+            }
+            if (upward && downward) {
+                max = Math.max(max, index - left + 1);
+            }
+            upward = false;
+            downward = false;
+            left = index > left ? index : index + 1;
+        }
+        return max;
+    }
+}
+
+// 3 passes
 class Solution {
     public int longestMountain(int[] A) {
         if (A == null || A.length == 0) {
