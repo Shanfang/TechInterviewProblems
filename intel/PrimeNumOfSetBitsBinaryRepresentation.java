@@ -5,9 +5,13 @@ class Solution {
         }
         int count = 0;
         for (int i = L; i <= R; i++) {
-            if (isPrime(countBit(i))) {
+            int bitCounts = Integer.bitCount(i); // use the built in method
+            if (isPrime(bitCounts)) {
                 count++;
             }
+            // if (isPrime(countBit(i))) {
+            //     count++;
+            // }
         }
         return count;
     }
