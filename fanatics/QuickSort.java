@@ -12,17 +12,27 @@ public class QuickSort {
         sort(arr, p + 1, high);
     }
     public int partition(int[] arr, int low, int high) {
-        int i = low - 1;
+        int i = low;
         int pivot = arr[high];
         for (int j = low; j < high; j++) {
             if (arr[j] < pivot) {
-                i++;
                 swap(arr, i, j);
+                i++;
             }
         }
-        i++;
         swap(arr, i, high);
         return i;
+        // int i = low - 1;
+        // int pivot = arr[high];
+        // for (int j = low; j < high; j++) {
+        //     if (arr[j] < pivot) {
+        //         i++;
+        //         swap(arr, i, j);
+        //     }
+        // }
+        // i++;
+        // swap(arr, i, high);
+        // return i;
     }
 
     private void swap(int[] arr, int i, int j) {
