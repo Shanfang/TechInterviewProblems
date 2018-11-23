@@ -1,3 +1,4 @@
+// two passes
 class Solution {
     public int firstUniqChar(String s) {
         int[] count = new int[26];
@@ -18,5 +19,24 @@ class Solution {
             }
         }
         return -1;
+    }
+}
+
+// one pass, but time complexity is bad
+class Solution {
+    public int firstUniqChar(String s) {
+        int index = -1;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            int first = s.indexOf(c);
+            if (first < 0) {
+                continue;
+            }
+            int last = s.lastIndexOf(c);
+            if (first == last) {
+                index = i;
+            }
+        }
+        return index;
     }
 }
