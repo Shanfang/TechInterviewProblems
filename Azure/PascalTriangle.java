@@ -1,3 +1,23 @@
+// update one array to generate each list, similar approach to optimize space complexity in DP
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (numRows <= 0) {
+            return result;
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            list.add(0, 1);
+            for (int j = 1; j < list.size() - 1; j++) {
+                list.set(j, list.get(j) + list.get(j + 1));
+            }
+            result.add(new ArrayList<>(list));
+        }
+        return result;
+    }
+}
+
+// treat the triangle as left upper part of a matrix
 class Solution {
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> result = new ArrayList<>();
