@@ -10,12 +10,18 @@ class Solution {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (Character.isDigit(c)) {
-                int num = c - '0';
-                while (i  + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
-                    num = num * 10 + s.charAt(i + 1) - '0';
+                int num = 0;
+                while (i < s.length() && Character.isDigit(s.charAt(i))) {
+                    num = num * 10 + s.charAt(i) - '0';
                     i++;
                 }
-                result += num * sign;
+                i--;
+                // int num = c - '0';
+                // while (i  + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
+                //     num = num * 10 + s.charAt(i + 1) - '0';
+                //     i++;
+                // }
+                // result += num * sign;
             } else if (c == '(') {
                 stack.push(result);
                 stack.push(sign);
