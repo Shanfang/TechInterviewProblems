@@ -7,6 +7,24 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+ class Solution {
+     TreeNode successor = null;
+     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+         if (root == null) {
+             return successor;
+         }
+         if (root.val > p.val) {
+             successor = root;
+             inorderSuccessor(root.left, p);
+         } else if (root.val <= p.val) {
+             inorderSuccessor(root.right, p);
+         }
+         return successor;
+     }
+ }
+
+ // tree traversal
 class Solution {
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
         if (root == null || p == null) {
