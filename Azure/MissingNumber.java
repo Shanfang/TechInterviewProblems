@@ -9,3 +9,15 @@ class Solution {
         return result;
     }
 }
+
+// subtract from sum
+class Solution {
+    public int missingNumber(int[] nums) {
+        int len = nums.length;
+        int sum = (0 + len) * (len + 1) / 2;
+        for (int num : nums) {
+            sum -= num;
+        }
+        return sum;
+    }
+}
