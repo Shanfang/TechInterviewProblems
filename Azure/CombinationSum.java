@@ -14,9 +14,7 @@ class Solution {
         if (sum > target) {
             return;
         }
-        if (cur >= candidates.length && sum != target) {
-            return;
-        }
+        
         if (sum == target) {
             result.add(new ArrayList<>(list));
             return;
