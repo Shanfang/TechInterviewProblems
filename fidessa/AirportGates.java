@@ -5,22 +5,31 @@ public class AirportGates {
     public static int findMinGates(int[] arrivals, int[] departures, int flights) {
         Arrays.sort(arrivals);
         Arrays.sort(departures);
-
-        int count = 1, max = 1;
-        int i = 1, j = 0;
-        while (i < flights && j < flights) {
-            if (arrivals[i] <= departures[j]) {
-                count++;
-                i++;
-                if (count > max) {
-                    max = count;
-                }
+        int gates = 0;
+        int j = 0;
+        for (int i = 0; i < arrivals.length; i++) {
+            if (arrivals[i] < departures[j]) {
+                gates++;
             } else {
-                count--;
                 j++;
             }
         }
-        return max;
+        return gates;
+        // int count = 1, max = 1;
+        // int i = 1, j = 0;
+        // while (i < flights && j < flights) {
+        //     if (arrivals[i] <= departures[j]) {
+        //         count++;
+        //         i++;
+        //         if (count > max) {
+        //             max = count;
+        //         }
+        //     } else {
+        //         count--;
+        //         j++;
+        //     }
+        // }
+        // return max;
     }
 
     public static void main(String[] args) {
